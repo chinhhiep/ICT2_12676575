@@ -1,0 +1,174 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<c2eventsheet>
+    <!--All the 'name' attributes are ignored by Construct 2 - they are there for readability only.-->
+    <name>Event sheet 1</name>
+    <events>
+        <event-group description="" title="Global Variables" />
+        <variable constant="0" name="iShield" static="0" type="number">5</variable>
+        <variable constant="0" name="iAmmo" static="0" type="number">100</variable>
+        <event-group description="" title="System" />
+        <event-block>
+        <conditions>
+            <condition id="-1" name="Every tick" type="System" />
+        </conditions>
+        <actions>
+            <action id="0" name="Set text" type="txtAmmo">
+                    <param id="0" name="Text">&quot;x&quot;&amp;iAmmo</param>
+            </action>
+                <action id="0" name="Set text" type="txtShield">
+                    <param id="0" name="Text">&quot;x&quot;&amp;iShield</param>
+                </action>
+            </actions>
+        </event-block>
+        <event-group description="" title="Player" />
+        <event-block>
+            <conditions>
+                <condition id="0" name="On collision with another object" type="sPlayer">
+                    <param id="0" name="Object">sAmmo</param>
+                </condition>
+            </conditions>
+            <actions>
+                <action id="-9" name="Destroy" type="sAmmo" />
+                <action id="-10" name="Add to" type="System">
+                    <param id="0" name="Variable">iAmmo</param>
+                    <param id="1" name="Value">30</param>
+                </action>
+            </actions>
+        </event-block>
+        <event-block>
+            <conditions>
+                <condition id="0" name="On collision with another object" type="sPlayer">
+                    <param id="0" name="Object">sShield</param>
+                </condition>
+            </conditions>
+            <actions>
+                <action id="-9" name="Destroy" type="sShield" />
+                <action id="-10" name="Add to" type="System">
+                    <param id="0" name="Variable">iShield</param>
+                    <param id="1" name="Value">5</param>
+                </action>
+            </actions>
+        </event-block>
+        <event-block>
+            <conditions>
+                <condition id="1" name="Is overlapping another object" type="sPlayer">
+                    <param id="0" name="Object">sBase</param>
+                </condition>
+            </conditions>
+            <actions />
+            <sub-events>
+                <event-block>
+                    <conditions>
+                        <condition id="-6" name="Every X seconds" type="System">
+                            <param id="0" name="Interval (seconds)">1</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-10" name="Add to" type="System">
+                            <param id="0" name="Variable">iAmmo</param>
+                            <param id="1" name="Value">10</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block>
+                    <conditions>
+                        <condition id="-6" name="Every X seconds" type="System">
+                            <param id="0" name="Interval (seconds)">2</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-11" name="Add to" type="sPlayer">
+                            <param id="0" name="Instance variable">iHealth</param>
+                            <param id="1" name="Value">5</param>
+                        </action>
+                    </actions>
+                </event-block>
+            </sub-events>
+        </event-block>
+      <event-group description="" title="Monster2" />
+      <event-block>
+        <conditions>
+          <condition id="0" name="On collision with another object" type="sFlyableBullet">
+            <param id="0" name="Object">sPlayer</param>
+          </condition>
+        </conditions>
+        <actions>
+          <action id="-9" name="Destroy" type="sFlyableBullet" />
+        </actions>
+        <sub-events>
+          <event-block>
+            <conditions>
+              <condition id="-14" name="Compare variable" type="System">
+                <param id="0" name="Variable">iShield</param>
+                <param id="1" name="Comparison">0</param>
+                <param id="2" name="Value">0</param>
+              </condition>
+            </conditions>
+            <actions>
+              <action id="-12" name="Subtract from" type="sPlayer">
+                <param id="0" name="Instance variable">iHealth</param>
+                <param id="1" name="Value">5</param>
+              </action>
+            </actions>
+          </event-block>
+          <event-block any="1">
+            <conditions>
+              <condition id="-14" name="Compare variable" type="System">
+                <param id="0" name="Variable">iShield</param>
+                <param id="1" name="Comparison">4</param>
+                <param id="2" name="Value">0</param>
+              </condition>
+            </conditions>
+            <actions>
+              <action id="-11" name="Subtract from" type="System">
+                <param id="0" name="Variable">iShield</param>
+                <param id="1" name="Value">1</param>
+              </action>
+            </actions>
+          </event-block>
+        </sub-events>
+      </event-block>                           
+               <event-block>
+            <conditions>
+                <condition id="0" name="On collision with another object" type="Enemies">
+                    <param id="0" name="Object">sPlayer</param>
+                </condition>
+            </conditions>
+            <actions>
+                <action id="-9" name="Destroy" type="Enemies" />
+            </actions>
+            <sub-events>
+                <event-block>
+                    <conditions>
+                        <condition id="-14" name="Compare variable" type="System">
+                            <param id="0" name="Variable">iShield</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">0</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-12" name="Subtract from" type="sPlayer">
+                            <param id="0" name="Instance variable">iHealth</param>
+                            <param id="1" name="Value">5</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block any="1">
+                    <conditions>
+                        <condition id="-14" name="Compare variable" type="System">
+                            <param id="0" name="Variable">iShield</param>
+                            <param id="1" name="Comparison">4</param>
+                            <param id="2" name="Value">0</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-11" name="Subtract from" type="System">
+                            <param id="0" name="Variable">iShield</param>
+                            <param id="1" name="Value">1</param>
+                        </action>
+                    </actions>
+                </event-block>
+            </sub-events>
+        </event-block>        
+    </events>
+</c2eventsheet>
