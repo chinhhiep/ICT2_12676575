@@ -1,0 +1,207 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<c2eventsheet>
+    <!--All the 'name' attributes are ignored by Construct 2 - they are there for readability only.-->
+    <name>Event sheet 8</name>
+    <events>
+        <event-group description="" title="Global Variables">
+            <sub-events>
+                <variable constant="0" name="EachX" static="0" type="number">0</variable>
+            </sub-events>
+        </event-group>
+        <event-block>
+            <conditions>
+                <condition id="-2" name="On start of layout" type="System" />
+            </conditions>
+            <actions>
+                <action id="0" name="Request URL" type="AJAX">
+                    <param id="0" name="Tag">&quot;GetScores&quot;</param>
+                    <param id="1" name="URL">&quot;http://localhost:1000/getscores.php&quot;</param>
+                </action>
+            </actions>
+        </event-block>
+        <event-block>
+            <conditions>
+                <condition id="-2" name="On start of layout" type="System" />
+            </conditions>
+            <actions>
+                <action id="0" name="Set text" type="txtScoresGO">
+                    <param id="0" name="Text">&quot;Scores:&quot;&amp;iScore5</param>
+                </action>
+            </actions>
+        </event-block>
+        <variable constant="0" name="nY" static="0" type="number">0</variable>
+        <variable constant="0" name="strPlayerNames" static="0" type="text"></variable>
+        <event-block>
+            <conditions>
+                <condition id="0" name="On clicked" type="btnSubmit" />
+            </conditions>
+            <actions>
+                <action id="-9" name="Set value" type="System">
+                    <param id="0" name="Variable">strPlayerNames</param>
+                    <param id="1" name="Value">tbxPlayerName.Text</param>
+                </action>
+                <action id="0" name="Set text" type="txtDebug3">
+                    <param id="0" name="Text">&quot;&quot;&amp;strPlayerNames</param>
+                </action>
+                <action id="0" name="Request URL" type="AJAX">
+                    <param id="0" name="Tag">&quot;PostScore&quot;</param>
+                    <param id="1" name="URL">&quot;http://localhost:1000/savescores.php?name=&quot;&amp;tbxPlayerName.Text&amp;&quot;&amp;score=&quot;&amp;iScore5</param>
+                </action>
+                <action id="3" name="Set visible" type="tbxPlayerName">
+                    <param id="0" name="Visibility">0</param>
+                </action>
+                <action id="-15" name="Set visible" type="txtScoresGO">
+                    <param id="0" name="Visibility">0</param>
+                </action>
+                <action id="2" name="Set visible" type="btnSubmit">
+                    <param id="0" name="Visibility">0</param>
+                </action>
+            </actions>
+        </event-block>
+        <event-block>
+            <conditions>
+                <condition id="-1" name="Every tick" type="System" />
+            </conditions>
+            <actions>
+                <action id="0" name="Request URL" type="AJAX">
+                    <param id="0" name="Tag">&quot;GetScores&quot;</param>
+                    <param id="1" name="URL">&quot;http://localhost:1000/getscores.php&quot;</param>
+                </action>
+            </actions>
+        </event-block>
+        <event-block>
+            <conditions>
+                <condition id="0" name="On completed" type="AJAX">
+                    <param id="0" name="Tag">&quot;GetScores&quot;</param>
+                </condition>
+            </conditions>
+            <actions>
+                <action id="-12" name="Set group active" type="System">
+                    <param id="0" name="Group name">&quot;Do Array&quot;</param>
+                    <param id="1" name="State">1</param>
+                </action>
+            </actions>
+            <sub-events>
+                <event-block>
+                    <conditions>
+                        <condition id="-14" inverted="1" name="Compare variable" type="System">
+                            <param id="0" name="Variable">strPlayerNames</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">&quot;&quot;</param>
+                        </condition>
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <event-block>
+                            <conditions>
+                                <condition id="-11" name="For Each" type="System">
+                                    <param id="0" name="Object">txtResult</param>
+                                </condition>
+                                <condition id="0" name="Compare text" type="txtResult">
+                                    <param id="0" name="Text to compare">strPlayerNames</param>
+                                    <param id="1" name="Case sensitivity">0</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="4" name="Set font color" type="txtResult">
+                                    <param id="0" name="Color">rgb(0, 0, 255)</param>
+                                </action>
+                                <action id="-9" name="Set value" type="System">
+                                    <param id="0" name="Variable">nY</param>
+                                    <param id="1" name="Value">txtResult.Y</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+            </sub-events>
+        </event-block>
+        <event-block>
+            <conditions>
+                <condition id="0" name="On completed" type="AJAX">
+                    <param id="0" name="Tag">&quot;PostScore&quot;</param>
+                </condition>
+            </conditions>
+            <actions>
+                <action id="0" name="Request URL" type="AJAX">
+                    <param id="0" name="Tag">&quot;GetScores&quot;</param>
+                    <param id="1" name="URL">&quot;http://localhost:1000/getscores.php&quot;</param>
+                </action>
+            </actions>
+        </event-block>
+        <event-group description="" inactive="1" title="Do Array">
+            <sub-events>
+                <event-block>
+                    <conditions>
+                        <condition id="3" name="For each element" type="Array">
+                            <param id="0" name="Axes">2</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="2" name="Set at X" type="Array">
+                            <param id="0" name="X">Array.CurX</param>
+                            <param id="1" name="Value">tokenat(Ajax.LastData, Array.CurX, &quot;|&quot;)</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block>
+                    <conditions>
+                        <condition id="-11" name="For Each" type="System">
+                            <param id="0" name="Object">txtResult</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="0" name="Set text" type="txtResult">
+                            <param id="0" name="Text">Array.At(txtResult.IID)</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block>
+                    <conditions />
+                    <actions>
+                        <action id="-12" name="Set group active" type="System">
+                            <param id="0" name="Group name">&quot;Do Array&quot;</param>
+                            <param id="1" name="State">0</param>
+                        </action>
+                    </actions>
+                </event-block>
+            </sub-events>
+        </event-group>
+        <event-block>
+            <conditions>
+                <condition id="-2" name="Compare Y" type="txtResult">
+                    <param id="0" name="Comparison">0</param>
+                    <param id="1" name="Y co-ordinate">nY</param>
+                </condition>
+            </conditions>
+            <actions>
+                <action id="4" name="Set font color" type="txtResult">
+                    <param id="0" name="Color">rgb(0, 0, 192)</param>
+                </action>
+            </actions>
+        </event-block>
+        <event-block>
+            <conditions>
+                <condition id="6" name="On object clicked" type="Mouse">
+                    <param id="0" name="Mouse button">0</param>
+                    <param id="1" name="Click type">0</param>
+                    <param id="2" name="Object clicked">btnBack</param>
+                </condition>
+            </conditions>
+            <actions>
+                <action id="0" name="Play" type="Audio">
+                    <param id="0" name="Audio file">Click1</param>
+                    <param id="2" name="Loop">0</param>
+                    <param id="3" name="Volume">0</param>
+                    <param id="1" name="Tag (optional)">&quot;mClick&quot;</param>
+                </action>
+                <action id="-16" name="Wait" type="System">
+                    <param id="0" name="Seconds">0.5</param>
+                </action>
+                <action id="-2" name="Go to layout" type="System">
+                    <param id="0" name="Layout">Menu</param>
+                </action>
+            </actions>
+        </event-block>
+    </events>
+</c2eventsheet>
